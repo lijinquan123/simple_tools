@@ -9,11 +9,11 @@ _original_send = Session.send
 
 # PYTHONPATH=/home/test/hooks /usr/local/miniconda3/envs/python314/bin/vodd ...
 def hooked_send(self, request, **kwargs):
-    print("Hooked URL:", request.url)
+    print(f"Hooked URL: {request.url}")
+    print(f"Hooked Headers: {request.headers}")
     print(f"Hooked kwargs: {request.method} {kwargs}")
-    print(f"Hooked Headers: {type(request.headers)}, {request.headers}")
     response = _original_send(self, request, **kwargs)
-    print("Hooked Status:", response.status_code)
+    print(f"Hooked Status: {response.status_code} {response.url}")
 
     return response
 
